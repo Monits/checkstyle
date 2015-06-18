@@ -417,7 +417,55 @@ class CC {
           conditional statements and multi-part boolean expressions
           (e.g., A &amp;&amp; B, C || D, etc.).
         </p>
+        <p>
+          The NPATH metric was designed base on Cyclomatic complexity to 
+          avoid problem of that metric like nesting level within a function 
+          whereas the NPATH measure does.
 
+          (quote)An NPATH threshold value of 200 has been established
+          for a function. The value 200 is based on studies done 
+          at AT&amp;T Bell Laboratories (quote).
+(quote)
+Some of the most effective methods of reducing the NPATH value include 
+-distributing functionality,
+- implementing multiple if statements as a switch statement
+- creating a separate function for logical expressions with a high count of and (&amp;&amp;) and or (||) operators.
+(quote)
+
+Although strategies to reduce the NPATH complexity
+of functions are important, care must be taken not to 
+distort the logical clarity of the software by applying a 
+strategy to reduce the complexity of functions. That is, 
+there is a point of diminishing return beyond which a 
+further attempt at reduction of complexity distorts the 
+logical clarity of the system structure.
+
+
+Structure	Complexity expression 
+if      	NP((if-range))+NP((expr))+1
+if-else 	NP((if-range))+NP((else-range))+NP((expr)) 
+while   	NP((while-range))+NP((expr))+1
+do while 	NP((do-range))+NP((expr))+1
+for 	    NP((for-range))+NP((exprl))+NP((expr2))+NP((expr3))+1 
+switch 	    NP((expr))+ S(i=1:i=n)NP((case-range(i)))+ NP((default-range)) 
+? 	        NP((exprl))+NP((expr2))+NP((expr3))+2 
+goto label 	1
+break 	    1
+Expressions Number of &amp;&amp; and 1 1 operators in expression
+continue	1
+return	    1
+sequential	1
+Function call	1
+C function 	P(i=1:i=N) NP(Statement(i))
+
+          Metic wsa described at "NPATH: a measure of execution path complexity and its applications" http://dl.acm.org/citation.cfm?id=42379
+
+
+
+          paths through a function. It takes into account the nesting of
+          conditional statements and multi-part boolean expressions
+          (e.g., A &amp;&amp; B, C || D, etc.).
+        </p>
         <p>
           Rationale: Nejmeh says that his group had an informal NPATH
           limit of 200 on individual routines; functions that exceeded
